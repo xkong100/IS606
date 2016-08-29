@@ -1,0 +1,29 @@
+---
+title: "Lab 0"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Question 1. What years are included in this data set? What are the dimensions of data frame and what are the variable or column names?
+```{r}
+source("http://www.openintro.org/stat/data/present.R")
+present$year
+dim(present)
+names(present)
+```
+Question 2. How do these counts compare to Arbuthnot's? Are they on a similar scale?
+By comparing them, They both have the same variables: year, boys, and girls. However, because of the difference of the time, the amount of boys and girls are significantly different between Arbuthnot's and Present's.
+
+Question 3. Make a plot that displays the boy-to-girl ratio for every year in the data set. What do you see? Does Arbuthnot’s observation about boys being born in greater proportion than girls hold up in the U.S.? Include the plot in your response.
+```{r}
+plot(x=present$year, y= present$boy/present$girl)
+```
+I think Arbuthnot's observation still holds up because by observing the plot of present, from 1940 to 2000, the boy-girl ratio is slightly greater than 1 although the boy-girl ratio decreases between 1940 and 1960 and between 1975 and 2000. 
+
+Question 4.In what year did we see the most total number of births in the U.S.?
+```{r}
+present$births <- present$girl+present$boy
+present[present$births == max(present$births), ]$year
+```
