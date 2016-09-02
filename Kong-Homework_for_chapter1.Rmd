@@ -1,0 +1,83 @@
+---
+title: "Chapter 1 Homework"
+author: "Vivian Kong"
+date: "August 30, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. 1.8 Smoking Habits of UK Residents.
+(a). What does each row of the data matrix represent?
+Each row represents every UK resident who attend  the survey that was conducted to study the smoking habits. The survey includes the information of each attendant's sex, age, marital, gross income, smoke, amtWeekends, and amtWeekdays.
+(b). How many participants were included in the survey?
+there are 1691 participants since there are 1691 rows.
+(c). Indicate whether each variable in the study is numerical or categorical. If numerical, identify as continouous or discrete. If categorical, indicate if the variable is ordinal.
+
+Sex: Categorical, not ordinal
+Age: Numerical, discrete
+Mariral: Categorical, not ordinal
+Gross Income: Numerical, continuous
+Smoke: Categorical, not ordinal
+amtWeekends: Numerical, discrete
+amtWeekdays: Numerical, discrete
+
+
+1.10 Cheaters, scope of inference. Exercise 1.5 introduces a study where researchers studying the relationship between honesty, age, and self-control conducted an experiment on 160 children between the ages of 5 and 15. The researchers asked each child to toss a fair coin in private and to record the outcome ( white or black) on a paper sheet, and said they would only reward children who report white. Half the students were explicitly told not to cheat and the others were not given any explicit instruction. Differences were oberved in the cheating rates in the instruction and not instruction groups, as well as some differences across children's characteristics within each group.
+(a). Identify the population of interest and the sample in this study.
+Population is entire population of children between the ages of 5 and 15. 
+Sample is 160 children between the ages of 5 and 15.
+
+(b). Comment on whether or not the results of the study can be generalized to the population, and if the findings of the study can be used to establish causal relationships.
+
+I think the results of the study may not be able to be generalized to the population. This experiment looked at children with very specific characteristics who is in this experiment and who may not be representatives of all children that are between 5 and 15. Cheating may consider more characteristics of children. The findings of the study may be not used to establish causal relationships. However, by using the control group may provide some pursuasive evidences to support such a relationship. 
+
+1.28 Reading the paper. Below are exerpts from two articles published in the NY Times
+(a). Based on the study, I think we still can not conclude that smoking casuses dementia later in life. Although everyone knows that smoking is bad for health and may cause cancers directly, there are other factors can cause dementia. For instance, the target people's genetic problem, eating habits and so on. Also these factors can not be able to control. By the study, we can not conclude smoking can cause dementia but smoking can definitely increase the chances that people will get dementia. 
+(b). The statement is not justified. In genearl, association does not imply causation. By studying the relation sleeping disorder and bully, Bullying in school children may be assosicated with sleep disorder. Children who have sleep disorder tend to  have greater chances to find bulling in school than other children who do not have sleep disorder.
+
+36. Exercise and mental health 
+(a). What type of study is this?
+     Experimental study.
+(b). What are the treatment and control groups in this study?
+     treatment group: for each group who exercise twice a week.
+     control group: for each group who is instructed the rest not to exercise.
+(c). Does this study make use of blocking? If so, what is the blocking variable. 
+     Yes, this study make use of blocking. blocking variable is different age groups. 
+(d). Does this study make use of blinding?
+     No, it does not becuase people in the groups know if they exercise or not.
+(e). Comment on whether or not the results of the study can be used to establish a causal relationship between exercise and mental  health, and indicate wheter or not the conclusions can be generalized to the population at large.
+    This result may be able to estabilish the causal relationship between exercise and mental health but still it needs some modifications. Sometimes mental health is related to the genetic reason. Before they doing such a study, they should test their groups and make sure that their mental health is normal. This conclusion still can not be generalized to the population at large. There are so many variables that out of control although we block the age groups.
+(f). Suppose you are given the task of determining if this proposed study study should get funding. Would you have any reservations about the study proposal?
+     Again, I think before the experiments start to test if their mental healths are normal or not. otherwise the           results will be biased. 
+48. create a box plot of the distribution of these scores. 
+```{r}
+data <- c (57, 66, 69, 71, 72, 73, 74, 77, 78, 78, 79, 79, 81, 81, 82, 83, 83, 88, 89, 94)
+boxplot(data, main="the final exam scores box plot", ylab="the grades")
+```
+50. Describe the distribution in the histograms below and match them to the box plots.
+(a) it is symmetric match (2)
+(b) it is unimodal match (3)
+(c) it is right skewed match (1)
+
+56. (a). The distibution is right skewed due to the "meaningful number of houses that cost more than $6,000,000". In this case median is a better measurement to measure the central tendency because the median does not count in the outlier but the mean does. The variability of observations would be represented by using IQR. Same reason for choosing median as a better measurement. IQR will be represents the most houses between first quatile and third quatile.
+ (b). The distribution is fairly symmetric due to the "very few houses that cost more than $1,200,000". In this case, mean is a better measurement because there is rarely outlier exist in the data. The variabily of observations we can use both Since it is a symmetric distribution. 
+ (c) The distribution is left skewed due to "most students don't drink since they are under 21 years old."
+ Median would be the best to represent because we have a lot of students who are not drinking. In this case, IQR should be the best to represent the variability because it won't be influenced by a few excessive drinkers.
+ (d). The distribution should be left skewed due to "a few high level executives earn much higher salaries thatn all other employees". Median still the best represent because it won't be influenced by the much higher salaries. IQR will be the best to represent the variability because the much higher salaries do not count in the IQR.
+ 
+ 70. Heart Transplants
+ (a). Based on the mosaic plot, is survival independent of whether of not the patient got a transplant?
+ The mosaic plot shows that more survivals in the treatment group than control group. The mosaic plot alone may not be able to prove if survival independent of whether of not the patient got a transplant.
+ (b) What do the box plots below suggest about the effecacy if the heart transplant treatment?
+ The boxplots show the treatment group has higher midian survive days and the IQR is much greater than the control group's IQR.
+ (c) What proportion of patients in the treatment group and what proportion of patients in the control group died.
+By using mosaic plots, we can roughly speaks that 1/3 of patient survive in the treatment group, and 1/8 of patient survive in the control group.
+(d) 
+I) The claim is that  if heart transplant can increase the life span.
+II). survive, non-survive, treatment, control, 0, greater than the observed difference in proportions.
+III). The distribution is a little skewed to the right, which means more people in the treatment group survived than in the control group. the effectiveness of the transplant program is good.
+
+ 
