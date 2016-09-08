@@ -1,0 +1,108 @@
+---
+title: "Homework 2 "
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 2.6 Dice rolls. 
+If you roll a pair of fair dice, what is the probability of:
+
+(a). getting a sum of 1?
+Since the minimum sum from a pair of dice is 2, so p(x=0)=0.
+
+(b). getting a sum of 5?
+There are 4 ways to get sum of 5. The 5 pairs are (1,4), (2,3), (3,2), (4,1)
+so p(x=5)=1/9
+
+(c). getting a sum of 12?
+The only way to get sum of 12 is (6, 6), so p(x=12)= 1/36.
+
+### 2.8 Poverty and Language
+The American Community Survey is an ongoing survey that provided data every year to give communities the current information they need to plan investments and services. The 2010 American Community Survey estimates that 14.6% of Amerians live below the poverty line, 20.7% speak a language other than English at home, and 4.2% fall into both categories.
+
+(a). Are living below the poverty line and speaking a foreign language at home disjoint?
+They are not disjoint. because the survey shows that 4.2% fall into both categories.
+
+(b). Draw a Venn diagram summarizing the variables and their associated probability.
+```{r}
+library(VennDiagram)
+draw.pairwise.venn(area1= 14.6, area2= 20.7, cross.area = 4.2, category= c("Below Poverty Line", "Foriegn language"), fill=c("pink", "light blue"))
+```
+variables are:P(only Below poverty line)=10.4%,P(only Foriegn language)= 16.5%, P (Below Poverty line and speak foreign language)= 4.2%
+
+(c). What percent of Americans live below the poverty line and only speak English at home?
+P(below the poverty line and only speak English)= 10.4%
+
+(d). What percent of Ameicans live below the poverty line or speak a foreign language at home?
+P(below the poverty line or speak a foreign language)= 16.5%+4.2%+10.4%= 31.1%.
+
+(e). What percent of Americans live above the poverty line and only speak English at home?
+P(above the line and only speak English)= 100% - 31.1% = 68.9%.
+
+(f). Is the event that someone lives below the poverty line independent of the event that the person speaks a foreign language at home?
+No, they are not indepentdent. because for independency, P(A and B)= P(A) * P(B). However, P(Below Poverty Line and speak Foreign Language) does not equal to P(Below Poverty Line) times P (speak Foreign Language)
+
+### 2.20 Assortative mating. 
+(a). What is the probability that a randomly chosen male respondent or his partner has blue eyes?
+P(male or his partner has blue eyes)= (114+108-78)/204 = 144/ 204 = 36/51.
+
+(b). What is the probability that a randomly chosen male respondent with blue eyes has a partner with blue eyes?
+P(male and his partner has blue eyes)= 78/204 = 13/34.
+
+(c). What is the probability that a randomly chosen male respondent with brown eyes has a partner with blue eyes? What about the probability of a randomly chosen male respondent with green eyes having a partner with blue eyes?
+P(male brown and partner blue)= 19/204
+P(male green and partner blue)= 11/204.
+
+(d). Does it appear that the eye colors of male respondents and their partners are independent? Explain your reasoning?
+The eye colos of male respondents and their partners are not indepent. By looking at the table, clearly, we can tell the color of the eyes related to their partners.
+
+### 2.30 Books on a bookshelf.
+(a). Find the probability of drawing a hardcover book first then a paperback fiction book second when drawing without replacement. 
+
+P( hardcover book first then paperback fiction book)= (28/95) * (59/94)= 1652/8930 = 826/4465.
+
+(b). Determine the probability of drawing a fiction book first and then a hardcover book second, when drawing without replacement.
+
+P(fiction book then hardcover)= (72/95)* (27/94)= 972/4465.
+
+(c). Calculate the probability of the scenario in part (b), except this time complete the calculations under the scenario where the first book is placed back on the bookcase before randomly drawing the second book.
+
+P(with replacement)= (72/95)(28/95)= 2016/9025.
+
+(d). The final answers to parts(b) and (c) are very similar. Explain.
+ Since we only take 2 times of the book it may not make so much difference. However, if you take the book 10 times, the denomenator for the probability without replacement will be much less than the denomenator for the probability with replacement. 
+ 
+### 2.38 Baggage fee
+An airline charges the following baggage fees: $25 for the first bag and $35 for the second. Suppose 54% of passengers have no checked luggage, 34% have one piece of checked luggage and 12% have two pieces. We suppose a negligible portion of people check more than two bags.
+
+(a). Build a probability model, compute the average revenue per passenger, and compute the corresponding standard deviation.
+```{r}
+luggage <- matrix(c(0, 1, 2, 0,25,60,0.54, 0.34, 0.12), ncol=3)
+colnames(luggage) <- c("number of baggage", "cost of baggage", "percentage of baggage")
+luggage <- as.table(luggage)
+luggage
+```
+Average revenue=(0)(0.54)+(25)(0.34)+(60)(0.12)=15.7
+variance= (0-15.7)^2(0.54)+(25-15.7)^2(0.34)+(60-15.7)^2(0.12)=398.01
+standard deviation= 19.95
+
+(b). About how much revenue should the airline expect for a flight of 120 passengers? With what standard deviation? Note any assumptions you make and if you think they are justified. 
+
+revenue= 120 (15.7)= 1884
+standard deviaiton=120(19.95)=2394
+
+### 2.44 Income and gender
+(a). Describe the distibution of total personal income.
+The distribution of total personal income is approximately symmetric. because most people fall in $35,000 to $49,9999 and that is the middle of the distribution.
+
+(b). What is the probability that a randomly chosen US resident makes less than $50,000 per year.
+p(x<50,000)= 0.022+0.047+0.158+0.183+0.212= 0.622
+
+(c). What is the probability that a randomly chosen US resident make less than $50,000 per year and is female?
+If I assume the relationship is independent between the income and the gender, then P(less than 50,000 and female)= P(less than $ 50,000) * P(female)= (0.622)(0.41)= 0.255
+
+(d). The same data source indicates that 71.8% of females make less than $50,000 per year. Use this value to determine whether or not the assumption you made in part (c) is valid. 
+Since the same data source indicates that 71.8% of females make less than $50,000, it is very different from what I get from part c. In this case, it may indicates that gender and income are dependent each other. 
