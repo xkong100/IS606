@@ -1,0 +1,124 @@
+---
+title: "Chapter 3"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 3.2 Area under the curve
+What percent of a standard normal distribution N (mena is 0, s.d is 1) is found in each region?
+(a). Z > -1.13
+```{r}
+normalPlot(mean=0, sd=1, bounds= c(-1.13,4), tails=FALSE)
+```
+p(z > -1.13)= 87.1%
+
+(b). Z < 0.18
+```{r}
+normalPlot(mean=0, sd=1, bounds = c(-4,0.18),tails = FALSE)
+```
+P(z < 0.18)= 57.1%
+
+(c). Z >8
+```{r}
+normalPlot(mean=0, sd=1, bounds=c(8, 100), tails = FALSE)
+```
+P(Z>8)=0
+
+(d). |z| < 0.5
+```{r}
+normalPlot(mean=0, sd=1, bounds=c(-0.5, 0.5), tails = FALSE)
+```
+P(-0.5<z<0.5)= 38.3%
+
+## 3.4 Triathlon times
+Mean of men : 4313 seconds, s.d of men: 583 seconds
+Mean of women : 5261 seconds, s.d of women: 807 seconds.
+(a).  Men 30-34 group: Mean(mu)= 4313 seconds, standard deviation = 583
+      Women 25-29 group: Mean(mu)= 5261 seconds, standard deviation = 807
+
+(b)What are the Z-scores for Leo's and Mary's finishing times? What do these Z-scores tell you?
+```{r}
+Z1 <- (4948-4313)/583
+Z1
+Z2 <- (5513-5261)/807
+Z2
+```
+Z(leo)=1.089
+Z(Mary)=0.312
+Both of their z scores are greater than 0 that means their time is longer than the average. Their scores not that good.
+(c). Did Leo or Mary rank better in their respective groups?
+Mary ranks better in their respective groups because Mary has smaller z score and it means that she took shorter period of time in the respective group.
+(d). What percent of the triathletes did Leo finish faster than in his group?
+```{r}
+normalPlot(mean=0, sd=1, bounds = c(1.089,4),tails = FALSE)
+```
+P(x>1.089)=13.8%
+(e). What percent of the triathletes did Mary finish faster than in her group?
+```{r}
+normalPlot(mean=0, sd=1, bounds = c(0.312,4), tails = FALSE)
+```
+P(x>0.312)=37.7%
+(f). If the distributions of finishing times are not nearly normal, would you answers to parts (b)-(e) change?Explain your reasoning.
+For a large amount of data, normally n > 30, Central Limit Theorem applies, then answers to parts (b)-(e) would not change. However, if the amount of athelets is less than 30, then the answer of (b)-(e) will change.
+
+## 3.18 Heights of female college students.
+(a). The mean height is 61.52 inches with a s.d of 4.58 inches. Use this information to determine if the heights approximately follow the Rule.
+Approximately 68% will fall within 56.94 inches to 66.1 inches. By observing the data, we have 17 data values fall within this range. 17/25 = 0.68. 
+Approximately 95% will fall within 52.36 inches to 70.68 inches. By observing the data, we have 24/25=0.96.
+
+(b). Do these data appear to follow a normal distribution? Explain your reasoning using the graphs provided below.
+```{r}
+x <- c(57,66,69,71,72,73,74,77,78,78,79,79,81,81,82,83,83,88,89,94)
+qqnorm(x)
+qqline(x)
+```
+The data set that is nearly normal where the points closely follow the line. It will follow the rule. 
+
+## 3.22 Defective rate
+A machine that produces a special type of transistor (a component of computers) has a 2% defective rate. The production is considered a random process where each transistor is independent of the others.
+(a). What is the probability that the 10th transistor produced is the first with a defect.
+P(the 10th transistor)= (0.98)^9 * (0.02)= 0.01667 =1.67%
+
+(b). What is the probability that the machine produces no defective transistors in a batch of 100?
+P(100)=(0.98)^100=0.1323
+
+(c). On average, how many transistors would you expect to be produced before the first with a defect? What is the standard deviation?
+ E(x)=1/p = 1/ 0.02 =50
+ s.d(x)= (1-p)/p^2 = sqrt((1-0.02)/(0.02)^2)=49.50
+ 
+ (d). Another machine that also produces transistors has a 5% defective rate where each transistor is produced independent of the others. On average how many transisors would you expect to be produce with this machine before the first with a defect? What is the standard deviation?
+ E(x)= 1/p = 1 / 0.05 =20
+ sd(x)= sqrt ( (1-0.05)/0.05^2)=19.49
+ 
+ (e). Based on your answer to parts (c) and (d), how does increasing the probability of an event affect the mean and standard deviation of the wait time until success?
+ when the probability is increasing, the mean and standard deviation is decreasing.
+ 
+ ## 3.38 While it is ofen assumed that the probabilities of having a boy or a girl are the same. the actual probability of having a boy is slightly higher at 0.51. Suppose a couple plans to have 3 kids.
+ (a). Use the binomial model to calculate the probability that two of them will be boys.
+ P(x=2 boys)= 3C2 (.51)^2*(0.49)=0.3823
+ 
+ (b). Write out all possible orderings of 3 children, 2 of whom are boys.
+ List: BBG,BGB,GBB
+ P(BBG)=(0.51)(0.51)(0.49)=0.1274
+ P(BGB)=0.1274
+ P(GBB)= 0.1274
+ P(2 boys)=p(BBG)+p(BGB)+p(GBB)=0.3823
+ 
+ (c). If we wanted to calculate the probability that a couple who plans to have 8 kids will have 3 boys, briefly describe why the approach from part (b) would be more tedious than the approach from part (a)
+ 
+ Since there are 8C3= 56 ways to make the whole list, to list each one, it will take a lot of time
+ 
+ ## 3.42 Serving in Volleyball.
+ A not-so-skilled volleyball player has a 15% chance of making the serve, which involves hitting the ball so it passes over the net on a trajectory such that it will land in the opposing team's court. Suppose that her seves are independent of each other.
+ 
+(a). What is the probability that on the 10th try she will make her 3rd successful serve?
+P(x)= 9C2 (0.85)^7(0.15)^3= 0.0390
+
+(b). Suppose she has made two successful serves in nine attempts. What is the probability that her 10th serve will be successful?
+P(x)= 0.15 because her serves are independent of each other.
+
+(c). Even though parts (a) and (b) discuss the same scenario, the probabilities you calculated should be different. Can you explain the reson for theis discrepancy?
+because the player serves are independent of each other then no matter how many times she was successful in the first 9 attempts, it will not affect the 10th attempt. However, in part (a), we have to be successful twice for the first 9 times, that is where makes the big difference.
