@@ -1,0 +1,95 @@
+---
+title: "Homework 4"
+author: "Vivian Kong"
+date: "October 8, 2016"
+output: html_document
+---
+
+## 4.4 Heighrs of adults
+
+(a). The point estimate for the average height of active individual is 171.1. and the point estimate for the median is 170.3.
+
+(b). The point estimate for the standard deviation is 9.4. 
+```{r}
+Q3 <- 177.8
+Q1 <- 163.8
+IQR <- Q3 - Q1
+IQR
+#IQR is 14
+```
+
+(c). 180cm is not unusually tall since it is only 1 s.d away the mean. 155 could be unusually short since it is 2 s.d away from the mean.
+
+(d). The mean and the standard deviation could be different from above but it should be similar data.
+
+(e). SE = 9.4 / sqrt(507) = 0.4175
+
+## 4.14 Thanksgiving Spending
+(a). True. We are 95% confident that average spending of the the population is containing the true population mean.
+
+(b). True. The right skewed makes the confidence interval is invalid.
+
+(c). False. 95% confidence means that if we take many times of sample  95% of those confidence Intervals will have the population mean.
+
+(d). True.
+
+(e). True. 90% confidence interval is narrower than 95% ci.
+
+(f). False.  S.D = (89.11-80.31)/(1.96/2)=2.2449, margin of error = 1.96*(2.2449/sqrt(436))=0.2107
+To derease the margin of error by a third, then new margin of error= 0.2107/3=0.0702.
+n = (Z*sd/ME)^2 = 3929.
+
+(g). False. We find from (f), the margin of error is 0.2107.
+
+##4.24 
+(a). Since the sample size is 36 which is more than 30, it would be inference statistics.
+
+(b). H0 : mean = 32
+     HA: mean < 32
+     alpha = 0.1
+     SE = sd / sqrt(n)= 4.31 / 6 = 0.72
+     Z= (30.69-32)/0.72 = -1.82
+     p(z<-1.82)= 0.0341 
+     
+(c). p(z<-1.82)= 0.0341  which is less than 0.1, we reject H0, accept Ha.
+
+(d). Lower = 30.69 -(1.28*0.72)=29.77
+     upper = 30.69+(1.28*0.72)= 31.61
+     CI ( 29.77, 31.61)
+     
+(e). The results agree.
+
+## 4.26 Gifted Children
+
+(a). H0: mean = 100
+     Ha: mean > 100
+     alpha = 0.1
+     SE = sd / sqrt(n) = 6.5 / 6 = 1.0833
+     z = (118.2 -100)/ 1.0833 = 16.80
+     since Z is so high, even without p-value test, we still can reject H0, accept Ha.
+     
+(b). Lower= 100 - (1.2816 * 1.0833) = 116.8116
+     upper = 100+(1.2816 * 1.0833) = 119.5884
+     
+    CI is (116.8116, 119.5884)
+(c).The results agree.
+ 
+## 4.34 CLT
+
+Sampling distribution of the mean is the distribution of mean values calculated from repeated sampling of a population. As the sample size increases, the shape of the distribution tends to be more normal, the spread gets smaller.
+
+## 4.40 
+(a). Z = (10500-9000)/1000 = 1.5
+    P(z > 1.5)= 1-0.933=6.68%
+    
+(b).The distribution is approximately normal.
+
+(c). SE = 1000/sqrt(15)=258.20
+     Z = (10500-9000)/ 258.2 = 5.8
+     P(Z>5.8)=0.0003
+     
+(e). No. 
+
+## 4.48 Same observation, different Sample Size.
+
+When sample size increases, SE will be decrease, and Z score will be increase, P will decrease.
