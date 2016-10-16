@@ -1,0 +1,148 @@
+---
+title: "Kong-HW5"
+author: "Vivian Kong"
+date: "October 11, 2016"
+output: html_document
+---
+
+
+## 5.6 Working backwards, PartII. 
+
+```{r}
+# Look up the t value for 90% CI
+
+CI <- 0.90
+alpha <- 1-CI
+t_area <- (1-(alpha/2))
+
+# degree of freedom
+n <- 25
+degree_freedom <- n - 1
+
+# t value
+t <- qt(t_area, degree_freedom)
+a <- rbind(c(1, t/5),
+           c(1, (-t)/5))
+b <- c(77,65)
+solve(a, b)
+
+# margin of error
+margin_of_error <- (77-65)/2
+margin_of_error
+```
+\
+**The values are:**\
+Sample mean is 71. Sample standard deviation is 17.5. Margin of error is 6.
+
+## 5.14 SAT scores
+(a).
+
+```{r}
+margin_of_error1 <- 25
+s.d <- 250
+z <- qnorm(0.95)
+z
+n <- ((z * s.d)/ margin_of_error1)^2
+n
+```
+
+(b). Luke's sample size should be larger than Raina's.
+
+(c). 
+
+```{r}
+margin_of_error1 <- 25
+s.d <- 250
+z <- qnorm(0.99)
+z
+n <- ((z * s.d)/ margin_of_error1)^2
+n
+```
+
+## 5.20 High School and Beyond, Part I. 
+
+(a). The difference in schores is approximately normal. Most people's reading and writing scores are clustered to 0.
+
+(b). It is independent for each other.
+
+(c). H0: There is no difference in the average of reading and writing score.
+     Ha: There is difference in the average of reading and writing score.
+     
+(d). They are independent and the observation is aprroximately normal distribution.
+
+(e). 
+```{r}
+mean_diff <- -0.545
+s.d <- 8.887
+n <- 200
+
+# Find the standard erro
+
+s.d.e <- s.d / sqrt(n)
+
+# T stat
+t <- (mean_diff - 0)/ s.d.e
+degree_freedom1 <- n - 1
+p <- pt(t, df=degree_freedom1)
+p
+```
+
+P is more than 0.05 we fail to reject the null hypothesis. 
+
+(f). It is Type II error.
+
+(g). Since we fail to reject null hypothesis, there is no difference between writing and reading.
+
+## 5.32 Fuel efficiency of manual and automatic cars, Part I.
+
+H0: There is no difference between automatic car's MPG and manual car's MPG.
+Ha: There is differnce between automatic car's MPG and manual car's MPG.
+
+```{r}
+n <- 26
+mean_diff1 <- 16.12 - 19.85
+standard_erro_diff <- sqrt((3.58^2/n)+(4.51^2/n))
+standard_erro_diff
+
+t1 <- (mean_diff1 - 0)/ standard_erro_diff
+t1 
+P_value <- pt(t1, df=n-1)
+P_value
+```
+
+# Since the p-value is less than 0.05, we reject the Null Hypothesis and accept alternative hypothesis. In this case, there is strong evidence to support the difference between manual and automatic transmissions.
+
+## 5.48 Work hours and education. 
+(a). H0:There is no difference in average hours worked across the 5 groups.
+     Ha: At least 1 group has a difference in the average hours worked with the other groups.
+
+(b). The observations are independent and approximately normal, and the variablity across the groups is about the same.
+
+(c). 
+```{r}
+n <- 1172
+k <- 5
+df1 <- k -1
+df2 <- n-k
+mean_total <- 40.45
+group <- data.frame(n=c(121,546,97,253,155),
+                    sd=c(15.81,14.97,18.1,13.62,15.51),
+                    mean=c(38.67, 39.6, 41.39,42.55,40.85))
+sg <- sum (group$n * (group$mean - mean_total)^2)
+sg
+
+Msg <- (1/df1)*sg
+sse <- 267382
+mse <- sse / df2
+mse
+
+F <- Msg / mse
+F
+```
+|         |Df   | Sum Sq  |Mean Sq| F value  | Pr (>F) |
+|---------|-----|---------|-------|----------|---------|
+|degree   | **4**    |  **2004.1** | 501.54  | **2.186745** | 0.0682 |
+|Residuals| **1167** |  267382| **229.12**   |              |
+|Total    | **1171** | **269386.1** |        |              |
+
+(d). Since P-value = 0.0682, that is greater than 0.05, we fail to reject the null hypothesis. There is no difference between groups.
