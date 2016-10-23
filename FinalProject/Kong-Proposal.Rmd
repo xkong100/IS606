@@ -1,0 +1,76 @@
+---
+title: "Final Project Proposal"
+author: "Vivian Kong"
+date: "10/21/2016"
+output: html_document
+---
+
+## 1. Research Question
+Load the data from the website of "Fivethirtyeight". My research topic is European terrorism fatalities. I want to find that total fatalties from terroirism incidents in Europe since 1970 to 2014. There were so many terrorrism attacks happened recently. I want to find out if there is a pattern of the terrisom attacks from 1970 to 2014.
+```{r}
+library(tidyr)
+library(dplyr)
+require(knitr)
+Terrorism_Country<- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/terrorism/eu_terrorism_fatalities_by_country.csv", stringsAsFactors = FALSE, check.names = FALSE, na.strings = c("", "NA"))
+kable(head(Terrorism_Country))
+```
+
+## 2. Cases 
+The raw data records all the terroirism fatalities of each country from 1970 to 2014.
+
+```{r}
+nrow(Terrorism_Country)
+ncol(Terrorism_Country)
+```
+
+There are 45 rows (1970 - 2014) and 13 columns (13 countries of Europe).
+
+## 3. Data collection
+The data is collected behind the story "The Rise Of Religiously Inspired Terrorism In France".
+
+## 4. Type of study
+The data is prospective study. It records all the attack of terrorisms of Europe from 1970 to 2014. 
+
+## 5. Data Source
+
+The raw data can be found at [http://www.start.umd.edu/gtd/] and [https://github.com/fivethirtyeight/data/tree/master/terrorism].
+
+## 6. Explanatory
+Year(categorical), Number of death in different couries(numerical)
+
+## 7. Relevant summary
+Provide summary statistics relevant to the research question.
+
+```{r}
+tc <- data.frame(Terrorism_Country)
+colnames(tc)[13] <- "UK"
+tc1 <- within(tc, {Belgium <- as.numeric(as.character(Belgium))
+Denmark <-as.numeric(as.character(Denmark))
+France <-as.numeric(as.character(France))
+Germany <-as.numeric(as.character(Germany))
+Greece <-as.numeric(as.character(Greece))
+Ireland <-as.numeric(as.character(Ireland))
+Italy <-as.numeric(as.character(Italy))
+Luxembourg <-as.numeric(as.character(Luxembourg))
+Netherlands <-as.numeric(as.character(Netherlands))
+Portugal <-as.numeric(as.character(Portugal))
+Spain <-as.numeric(as.character(Spain))
+UK<-as.numeric(as.character(UK))
+})
+tc1 %>% mutate(sum_year = rowSums(.[2:13]))
+tc1 %>% summarise_each(funs(sum))
+summary(tc1$UK)
+summary(tc1$Spain)
+summary(tc$France)
+```
+
+
+
+
+
+
+
+
+
+
+
