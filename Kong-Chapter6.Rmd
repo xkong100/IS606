@@ -1,0 +1,98 @@
+---
+title: "Chapter 6"
+author: "Vivian Kong"
+date: "10/29/2016"
+output: html_document
+---
+
+## 6.6 2010 Healthcare Law.
+
+a. False. The confiden interval appies to the population.
+b. True.
+c. True.
+d. False. 90% will have a lower margin of error. 
+
+## 6.12 Legalization of marijuana
+
+a. It is a sample statistics because 1259 US residents are sample of American population.
+b. 
+```{r}
+SE <- sqrt((0.48 * (1-0.48))/1259)
+LI <- 0.48 - (qnorm(0.975)*SE)
+HI <- 0.48 +(qnorm(0.975)*SE)
+LI
+HI
+```
+
+c. 1. Observations are independent. The sample is nore more than 10% of population. 
+   2. Success-failure condition. The success and failure are both greater than 10. 
+
+d. I think the news' conclusion is biased because the sample take from U.S can not represent the entire population.
+
+## 6.20 Legalize Marijuana, Part II
+```{r}
+n <- (0.48 * (1-0.48))/ (0.02 / (qnorm(0.975)))^2
+ceiling(n)
+```
+
+## 6.28 Sleep deprivation
+```{r}
+SE_cal <- sqrt((0.08 * (1-0.08))/11545)
+SE_org <- sqrt ((0.088 * (1-0.088))/4691)
+SE_org_cal <- sqrt(SE_cal+SE_org)
+LI <- (0.088-0.08) - (qnorm(0.975)*SE_org_cal)
+UI <- (0.088-0.08)+ (qnorm(0.975)*SE_org_cal)
+LI
+UI
+```
+Since the interval is between -15% to -17%. This means that the proportion of Oregonians who are sleep deprived can be as much as 15% to 17% less than Californians. 
+
+## 6.44 Barking deer
+
+a. H0: The barking deer does not prefer a certain habitat to forage.
+   HA: The barking deer has certain habitats that it prefer to forage.
+
+b. A chi-square test.
+
+c. 1. Independence. Each habitat are independent.
+   2. Sample size. 
+
+d.
+```{r}
+   Zwood <- (0.9-4.8)^2/4.8
+   Zgrass <- (3.8 - 14.7)^2 / 14.7
+   Zforest <- (14.3-39.6)^2 / 39.6
+   Zoth <- (81.0-40.9)^2 / 40.9
+   Z_all <- Zwood + Zgrass + Zforest + Zoth
+   Z_all
+   1-pchisq(Z_all, 3)
+```
+
+Since P-value is very very small, we can reject H0, accept HA.
+
+## 6.48 Coffee and Depression.
+a. Chi-Square test
+b. 
+H0: There is no relationship between coffee consumption and clinical depression
+HA: There is relationship between coffee consumption and clinical depression
+
+c. 
+```{r}
+p_depressed <- (2607/50739) * 100
+p_normal <- ( 48132/50739) * 100
+exp_cnt <- 6617 * 0.0514
+obs_cnt <- 373
+(obs_cnt - exp_cnt)^2 / exp_cnt
+```
+
+d. 
+```{r}
+df <- (5-1) * (2-1)
+df
+1- pchisq(20.93, df)
+```
+
+f. Since P-value is very small, we will reject H0, accept HA.
+
+g. Yes. I agree with it because the result shows that there is a relationship between the coffee consumption and the depression.
+
