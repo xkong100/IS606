@@ -1,0 +1,74 @@
+---
+title: "Kong-Chapter7"
+author: "Vivian Kong"
+date: "11/12/2016"
+output: html_document
+---
+
+## 7.24 Nutritions at Starbucks
+(a). Calories and amount of carbohydrates is positive linear relationship.
+(b). explanatory variable is amount of carbohydrates and the response variable is the calories.
+(c). We want to predict the calories of the starbucks by looking at the amount of carbohydrates.
+(d). It satisfies the linearility, nearly normal residual, constant variability and independent obervations.
+
+## 7.26 Body Measurements
+(a).
+```{r}
+b1 <- (9.41 / 10.37) * 0.67
+b0 <- (b1 * (0-107.2))+ 171.14
+```
+\[\hat{y}= `r b0` + `r b1`x\]
+
+(b). The intercept is te height at girth equal to 0cm. The slope is when shoulder increase by 1 cm the height will increase by 0.6 cm.
+(c).
+
+```{r}
+r2 <- 0.67^2
+```
+The \(R^2 =`r r2`\). 45% of the variance of the height depends on the variance of the shoulder.
+(d). 
+```{r}
+height_shoulder <- function(girth)
+{
+  height <- b0 + b1 * girth
+  return(height)
+}
+predict <- height_shoulder(100)
+predict
+```
+
+(e). Residual is -6
+
+(f). no, it is not appropriate because it is almost 5 standard deviation below the mean shoulder girth.
+
+## 7.30 Cats
+(a).
+\[\hat{y} = -0.357 + 4.034x\]
+
+(b). When the cat's body height is 0, the heart weight will be negative. 
+
+(c). The slope is 4.034. when the cat's body weight increases by 1 gram, the heart weight will increase by 4.034 grams.
+
+(d). The \(R^2\) is 64.66%. 64.66% of the variation the heart weight depends on the variabtion of the cat's body.
+
+(e). 
+```{r}
+r <- sqrt(0.6466)
+r
+```
+
+## 7.40 Rate my Professor
+
+(a). 
+```{r}
+b1 <- (3.9983 - 4.010) / -0.0883
+b1
+```
+(b).
+It provides very strong positive relationship between teaching evaluation and beauty, since P-value is so much less than the significant level.
+
+(c). Linearility : it is a little bit weak trend but it is satisfied
+Nearly normal residual: In the QQ plot, they are approximately normal.
+Constant Variability : The scatterplot of the residuals appears to have constant variability.
+Independent Observations: 463 professors shoulde be the single obervation.
+
