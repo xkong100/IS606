@@ -1,0 +1,103 @@
+---
+title: "Chapter 8 HW"
+author: "Vivian Kong"
+date: "11/21/2016"
+output: html_document
+---
+
+## 8.2 Baby Weights, Part II
+#### a)
+\[y=120.07 - 1.93 x_{parity}\]
+
+#### b)
+slope is -1.93 which meas 1 parity increasing will decrease the baby's weigh by 1.93 oz. The first baby is 118.14 oz. 
+
+#### c) 
+since p-value is 0.1052 which is not a significant relationship between the average birth weigh and parity.
+
+## 8.4 Absenteeism
+
+#### a)
+\[y = 18.93 - 9.11 x_{eth} + 3.10 x_{sex} + 2.15 x_{lrn}\]
+
+#### b)
+The slope of eth means that all else being the same, when eth increase by 1, it will decrease the y by 9.11 days.
+The slope of sex means that all else being the same, when the subject is male, y will increase by 3.10 days.
+The slope of lrn means that all else being the same, when the subject is a slow learner, y will increase by 2.15 days.
+
+#### c)
+```{r}
+eth <- 0
+sex <- 1
+lrn <- 1
+actualDayMissed <- 2
+
+absDaysPred <- 18.93 - 9.11 * eth + 3.1 * sex + 2.15 * lrn
+absDaysPred
+
+residual <- actualDayMissed - absDaysPred
+residual
+```
+
+The residual is `r residual` days.
+
+#### d)
+```{r}
+n <- 146
+k <- 3
+varRes <- 240.57
+varOut <- 264.17
+
+r2 <- 1- (varRes/ varOut)
+r2
+adjustedr2 <- 1- (1 - r2) * ((n-1) / (n-k-1))
+adjustedr2
+```
+
+##8.8 Absenteeism
+
+In this case, we will remove the ethnicity first.
+
+##8.16 Challenger disaster
+
+#### a) 
+When the temperature is less than 66, there is more damaged O-rings. 
+
+#### b)
+The key components are the Intercept and the Temperature values. Z-value and P-value help us distinguish the significant levels.
+
+#### c) 
+\[\log_e(\frac{p_i}{1-p_i}) = 11.6630 - 0.2162 x_{temp}\]
+
+#### d)
+Since the p-value is very close to 0, it indicates that the O-ring failure is strongly correlated to temperature. 
+
+## 8.18 Challenger disaster, Part II
+
+#### a)
+```{r}
+temp <- 51
+p <- exp(11.6630-(0.2162 * temp)) / (1+exp(11.6630- (0.2162 * temp)))
+p
+
+temp1<- 53
+p2 <- exp(11.6630-(0.2162 * temp1)) / (1+exp(11.6630- (0.2162 * temp1)))
+p2
+
+temp2 <- 55
+p3 <-exp(11.6630-(0.2162 * temp2)) / (1+exp(11.6630- (0.2162 * temp2)))
+p3
+```
+
+####b)
+```{r}
+library(ggplot2)
+temps <- seq(51, 71, by=2)
+probs <- c(p, p2, p3, 0.341, 0.251, 0.179, 0.124, 0.084, 0.056, 0.037, 0.024)
+df_prob <- data.frame(Temperature = temps, Prob_Damage = probs)
+g1 <- ggplot(df_prob) + geom_line(aes(x=df_prob$Temperature, y=df_prob$Prob_Damage))
+g1
+```
+
+####c)
+We need more sufficient data. For the logistic model: x is linearly related to \[logic((p_i))\]. it looks like that they seem to have a linear relationship to the probability of damage. y is independent of the other outcomes.
