@@ -1,0 +1,96 @@
+---
+title: "Final Project"
+author: "Vivian Kong"
+date: "12/11/2016"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+## Final Project
+
+
+The conflits of Middle East Countries have never stopped for hundreds years.However, The terrorism was not only in the countries of the Middle East such as Iraq, Syria, and so on, but it was also rising in the European countries and U.S in this decade. Especially after ISIS rises and uses the power of Internet to cause the tense atmosphere in the U.S and European Countries. 
+
+I can never forget the day of November 2015 Paris attacks because my friends was traveling in the Paris at that time and she is near the area of terriorist attack. Fortunately, she was safe but when she described what happened at that time, I realized the terrorism is so close to every person. 
+
+My research question is why the terrorists always choose citizens as their target?
+
+The data are collected by the Global Terrorism Database(GTD) from 1970 to present.GTD defined the terroirist attack as the threatened or actual use of illegal force and violence by a non-state actor to attain a political, economic, religious or social goal through fear, coercion, or intimidation. GTD combines automated and manual data collection strategies. The process begins with a universe of over one million media articles on any topic published daily worldwide in order to identify the relatively small subset of articles that describe terrorist attacks. 
+
+The population of interest is the people who get attacks in December of 2015 all over the world. I think that it can generalize to the population because it records over 1 million media articles on any topic that describe terrorist attacks. It can mainly represent the Southeast Asia, Middle East and Africa. It is possible to fail the generalization because of the false news and reports. Also ISIS is good at using Internet to produce false and violent information to spread the world. It may affects people's belief and also create the horrifying atmosphere. In this case, the false information may be created.
+
+These data can be used to establish causal links in the world because the terroirist attacks happen every day in the world. They not only happen in the Middle East countries, but they also happen in the United States, and especially European Countries. 
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(plyr)
+library(stringr)
+require(knitr)
+terroirist.attack<- read.csv("https://raw.githubusercontent.com/xkong100/IS606/master/FinalProject/GTD-Export%20(1).csv", stringsAsFactors = FALSE, check.names = FALSE, na.strings = c("", "NA"))
+nrow(terroirist.attack)
+```
+
+There are 1011 observations of the data, and it only included the attacks of December 2015. The variables are target type which is Catogorical variable, fatalities/injured which is numerical type, and countries/regigions which is categorical variable. 
+The type of study is observational because the data are collected by over one million media articles on any topic published that describe the terrorist attacks.
+
+```{r}
+terroirist.attack <- data.frame(terroirist.attack[,-(c(1:2,5:10,17:19,21:23))])
+kable(head(terroirist.attack))
+```
+```{r}
+fatalities <- as.numeric(terroirist.attack$FATALITIES)
+injured <- as.numeric(terroirist.attack$INJURED)
+terroirist.attack$fatalities.injured <- fatalities + injured
+country <- aggregate(fatalities.injured ~ COUNTRY, data = terroirist.attack, FUN = sum )
+country %>% summarise(Mean.FI = mean(fatalities.injured), Max.FI = max (fatalities.injured), standard.deviation.FI = sd(fatalities.injured))
+```
+
+```{r}
+target <- aggregate(fatalities.injured ~ TARGET.TYPE.1, data = terroirist.attack, FUN = sum)
+kable(target)
+boxplot(target$fatalities.injured, main=toupper("Death/Injuries"))
+
+```
+
+From the data, we can clearly to tell that the fatalities and injuries in the private citizens were much higher than we can expect. 
+The following pie charts help us visualize the difference of the death/injuries of government with weapon and the difference of the death/injuries of citizen without weapon. There are 19 target types, I simply combined military and police, violent political party and Terrorists/Non-state Militia, and Business and Educational Insititution.
+
+```{r}
+government <- c(246, 1560, 246)
+citizen<-c(734, 1516, 187,81)
+lables1 <- c("Government", "Millitary/Police", "Violent Party")
+pct1 <- round(government/sum(government)*100)
+lables1 <- paste(lables1,pct1)
+lables1<-paste(lables1,"%", sep="")
+pie(government,labels = lables1, col=rainbow(length(lables1)),main="death/Injury of Government with weapons")
+
+lables2 <- c("Education/Business", "Private citizens", "Religious Institutions","Transportation")
+pct2 <- round(citizen/sum(citizen)*100)
+lables2 <- paste(lables2,pct2)
+lables2<-paste(lables2,"%", sep="")
+pie(citizen,labels = lables2, col=rainbow(length(lables2)),main="death/Injury of citizen without weapons")
+```
+
+Since the data come from the samples of December 2015, and I want to compare two samples, one is the fatalities/ death of the government with weapon, and the other one is the fatalities/death of the citizens without weapon. So, I will use the 2 sample t test to do the hypothesis testing. 
+
+Perform a hypothesis test at alpha = 5%, and determine is there a significant difference between the fatalities / injured in the government/military (armed) and the fatalities / injured in the citizens such as the educational insititution, public transportation and so on in December 2015. 
+
+\[H_0\]: There is no difference between the fatalities / injured in the armed government/ military and the fatalities / injured in the citizens without armed in December 2015. 
+
+\[H_a\]: There is significant difference between the fatalities / injured in the armed government / military and the fatalities/ injured in the citizens without armed in December 2015.
+
+```{r}
+var.test(government, citizen)
+qf(0.95, 2, 3)
+t.test(government, citizen, var.equal = TRUE, paired = FALSE)
+qt(0.975, 6)
+```
+
+By looking at the 2 sample t test result, p value is significantly greater than alpha. It means that we can not reject our null hypothesis. It means that there is no sifnicant difference between the fatalities / injured of Government with weapon and the fatalities / injured of citizens without weapons. In this case, we may commit the Type II error. When there is significantly difference between the death/injury of Government with weapon and the death/injury of citizen without weapon, we incorrectly reject it. 
+
+However, the conclusion for this test is very disappointing. Over one month period (December 2015), there are approximately 3000 terroiris attaks on schools, business, private citizens and so on in the world. Why would terrorist attack such targets? One obvious reason is that they can. In this way, they can undermine the legitimacy and authority of a state. Even under the protection of the government, the citizens without weapons can still be attacked. It will make citizens lose the confidence in the government. Second of all, the attacks can stall people's work, education and so on. It will create the greater reaction in the socciety and even people's normal life. The economics can not move on and people are suffering. 
+
+I hope that we can not only just analysis the historical data and feel sorry for the tragedies, but we can also provide an analysis to protect people. Or using the "bloody" analysis to let more people know how bad the situation is. It may happens to everyone in the world. In the future, I want to do more research about the terrorism attacks such as the trend of their attacks, the weapons they use to attack people, and the countries they are targeting and they will target.
